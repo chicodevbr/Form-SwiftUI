@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var emailAddress = ""
+    @State private var message = "Write your message here..."
+    @State private var includeLogs = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Form {
+            TextField("Email Address", text: $emailAddress)
+            TextEditor(text: $message)
+            Toggle("Include Logs", isOn: $includeLogs)
+            Button("Submit", action: {
+                print("Submit button tapped")
+            })
         }
-        .padding()
+        
     }
 }
 
