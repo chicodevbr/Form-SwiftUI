@@ -28,16 +28,19 @@ struct ContentView: View {
             Text("Email").tag(ContactMethod.email)
             Text("Phone").tag(ContactMethod.phone)
           }
+          .pickerStyle(SegmentedPickerStyle())
           switch preferredContactMethod {
           case .email:
             TextField("Email Address", text: $emailAddress)
+              .textContentType(.emailAddress)
+              .disableAutocorrection(true)
           case .phone:
             TextField("Phone Number", text: $phoneNumber)
           }
         }
         Section(header: Text("What can we help you with?")) {
           Picker("Subject", selection: $subject) {
-            ForEach(["Help", "Suggestion", "Feature Request"], id: \.self) { subject in
+            ForEach(["Help", "Suggestion", "Bug Report"], id: \.self) { subject in
               Text(subject)
             }
           }
@@ -52,10 +55,10 @@ struct ContentView: View {
           print("Submit button tapped")
         })
       }
+      .navigationTitle("Contact Us")
     }
   }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
